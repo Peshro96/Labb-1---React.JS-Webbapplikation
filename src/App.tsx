@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoList from "./components/TodoList";
-import { getTodos } from "./api/todos";
+import TodoForm from "./components/TodoForm";
+import { getTodos, createTodo } from "./api/todos";
 import type { Todo } from "./types/todo";
 
 export default function App() {
@@ -34,9 +35,18 @@ export default function App() {
     fetchTodos();
   }, []);
 
+  // Lägger till en ny todo via API:t
+  const addTodo = async (title: string) => {
+    const newTodo = await createTodo(title);
+    // Lägger till den nya todon sist i listan med spread operator
+    setTodos((prev) => [...prev, newTodo]);
+  };
+
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
       <h1>Att-göra-lista</h1>
+
+      <TodoForm onAddTodo={addTodo} />
 
       {loading && <p>Laddar todos...</p>}
 
