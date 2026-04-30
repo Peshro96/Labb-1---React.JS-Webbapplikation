@@ -48,3 +48,28 @@ export async function createTodo(title: string): Promise<Todo> {
     throw new Error("Kunde inte skapa todo");
   }
 }
+
+// Uppdaterar en befintlig todo i API:t
+export async function updateTodo(todo: Todo): Promise<Todo> {
+  try {
+    // PUT-anrop till specifik todo via id i URL:en
+    const response = await fetch(`${API_URL}/${todo.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Skickar hela objektet eftersom PUT ersätter den befintliga
+      body: JSON.stringify(todo),
+    });
+
+    if (!response.ok) {
+      throw new Error("Kunde inte uppdatera todo");
+    }
+
+    // Servern skickar tillbaka den uppdaterade todo:n
+    const updatedTodo: Todo = await response.json();
+    return updatedTodo;
+  } catch {
+    throw new Error("Kunde inte uppdatera todo");
+  }
+}
