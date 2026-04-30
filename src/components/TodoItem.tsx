@@ -3,10 +3,11 @@ import type { Todo } from "../types/todo";
 // Props som komponenten tar emot från TodoList
 type TodoItemProps = {
   todo: Todo;
+  onToggleTodo: (todo: Todo) => Promise<void>;
 };
 
 // Visar en enskild todo som ett kort
-export default function TodoItem({ todo }: TodoItemProps) {
+export default function TodoItem({ todo, onToggleTodo }: TodoItemProps) {
   return (
     <li
       style={{
@@ -18,9 +19,14 @@ export default function TodoItem({ todo }: TodoItemProps) {
       }}
     >
       <h3 style={{ margin: "0 0 4px 0" }}>{todo.title}</h3>
-      <p style={{ margin: 0 }}>
+      <p style={{ margin: "0 0 8px 0" }}>
         Status: {todo.done ? "Klar" : "Inte klar"}
       </p>
+
+      {/* Knapp som togglar done-status via callback till App */}
+      <button onClick={() => onToggleTodo(todo)}>
+        {todo.done ? "Markera som ej klar" : "Markera som klar"}
+      </button>
     </li>
   );
 }

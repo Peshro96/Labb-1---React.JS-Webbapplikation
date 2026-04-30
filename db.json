@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Handla mat",
-      "done": false
+      "done": true
     },
     {
       "id": 2,
@@ -13,16 +13,16 @@
     {
       "id": 3,
       "title": "Träna",
-      "done": false
+      "done": true
     },
     {
       "title": "Simma",
-      "done": false,
+      "done": true,
       "id": 4
     },
     {
       "title": "Diska",
-      "done": false,
+      "done": true,
       "id": 5
     }
   ]

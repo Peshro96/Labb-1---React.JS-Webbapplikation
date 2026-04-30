@@ -3,10 +3,11 @@ import TodoItem from "./TodoItem";
 
 type TodoListProps = {
   todos: Todo[];
+  onToggleTodo: (todo: Todo) => Promise<void>;
 };
 
 // Renderar listan av todos. Visar ett meddelande om listan är tom.
-export default function TodoList({ todos }: TodoListProps) {
+export default function TodoList({ todos, onToggleTodo }: TodoListProps) {
   if (todos.length === 0) {
     return <p>Inga todos att visa.</p>;
   }
@@ -15,7 +16,7 @@ export default function TodoList({ todos }: TodoListProps) {
     <ul style={{ padding: 0 }}>
       {/* map() loopar igenom arrayen, key behövs för React */}
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem key={todo.id} todo={todo} onToggleTodo={onToggleTodo} />
       ))}
     </ul>
   );

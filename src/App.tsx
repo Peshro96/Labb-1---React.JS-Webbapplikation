@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
-import { getTodos, createTodo } from "./api/todos";
+import { getTodos, createTodo, updateTodo } from "./api/todos";
 import type { Todo } from "./types/todo";
 
 export default function App() {
@@ -42,6 +42,17 @@ export default function App() {
     setTodos((prev) => [...prev, newTodo]);
   };
 
+  // Togglar done-status på en todo via API:t
+  const toggleTodo = async (todo: Todo) => {
+    // Skapar ett nytt objekt med samma data men inverterad done-status
+    const updated = await updateTodo({ ...todo, done: !todo.done });
+
+    // Byter ut den gamla todon i listan med den uppdaterade
+    setTodos((prev) =>
+      prev.map((t) => (t.id === updated.id ? updated : t))
+    );
+  };
+
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
       <h1>Att-göra-lista</h1>
@@ -52,7 +63,7 @@ export default function App() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {!loading && !error && <TodoList todos={todos} />}
+      {!loading && !error && <TodoList todos={todos} onToggleTodo={toggleTodo} />}
     </div>
   );
 }
