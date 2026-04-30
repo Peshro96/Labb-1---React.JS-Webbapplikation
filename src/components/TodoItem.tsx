@@ -18,7 +18,15 @@ export default function TodoItem({ todo, onToggleTodo }: TodoItemProps) {
         listStyle: "none",
       }}
     >
-      <h3 style={{ margin: "0 0 4px 0" }}>{todo.title}</h3>
+      <h3
+        style={{
+          margin: "0 0 4px 0",
+          textDecoration: todo.done ? "line-through" : "none",
+          color: todo.done ? "#888" : "#000",
+        }}
+      >
+        {todo.title}
+      </h3>
       <p style={{ margin: "0 0 8px 0" }}>
         Status: {todo.done ? "Klar" : "Inte klar"}
       </p>
