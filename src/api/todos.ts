@@ -73,3 +73,21 @@ export async function updateTodo(todo: Todo): Promise<Todo> {
     throw new Error("Kunde inte uppdatera todo");
   }
 }
+
+// Tar bort en todo från API:t
+export async function deleteTodo(id: number): Promise<void> {
+  try {
+    // DELETE-anrop till specifik todo via id i URL:en
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Kunde inte ta bort todo");
+    }
+
+    // DELETE returnerar inget data - vi avslutar bara funktionen
+  } catch {
+    throw new Error("Kunde inte ta bort todo");
+  }
+}
