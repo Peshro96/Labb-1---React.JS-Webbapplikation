@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
-import { getTodos, createTodo, updateTodo } from "./api/todos";
+import { getTodos, createTodo, updateTodo, deleteTodo } from "./api/todos";
 import type { Todo } from "./types/todo";
 
 export default function App() {
@@ -53,6 +53,13 @@ export default function App() {
     );
   };
 
+  // Tar bort en todo via API:t
+  const removeTodo = async (id: number) => {
+    await deleteTodo(id);
+    // Filtrerar bort todon med matchande id från listan
+    setTodos((prev) => prev.filter((t) => t.id !== id));
+  };
+
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
       <h1>Att-göra-lista</h1>
@@ -63,7 +70,13 @@ export default function App() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {!loading && !error && <TodoList todos={todos} onToggleTodo={toggleTodo} />}
+      {!loading && !error && (
+        <TodoList
+          todos={todos}
+          onToggleTodo={toggleTodo}
+          onDeleteTodo={removeTodo}
+        />
+      )}
     </div>
   );
 }

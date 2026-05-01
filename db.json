@@ -1,34 +1,3 @@
 {
-  "todos": [
-    {
-      "id": 1,
-      "title": "Handla mat",
-      "done": false
-    },
-    {
-      "id": 2,
-      "title": "Plugga inför labben",
-      "done": true
-    },
-    {
-      "id": 3,
-      "title": "Träna",
-      "done": true
-    },
-    {
-      "title": "Simma",
-      "done": true,
-      "id": 4
-    },
-    {
-      "title": "Diska",
-      "done": true,
-      "id": 5
-    },
-    {
-      "title": "springa",
-      "done": false,
-      "id": 6
-    }
-  ]
+  "todos": []
 }

@@ -4,10 +4,15 @@ import type { Todo } from "../types/todo";
 type TodoItemProps = {
   todo: Todo;
   onToggleTodo: (todo: Todo) => Promise<void>;
+  onDeleteTodo: (id: number) => Promise<void>;
 };
 
 // Visar en enskild todo som ett kort
-export default function TodoItem({ todo, onToggleTodo }: TodoItemProps) {
+export default function TodoItem({
+  todo,
+  onToggleTodo,
+  onDeleteTodo,
+}: TodoItemProps) {
   return (
     <li
       style={{
@@ -32,9 +37,15 @@ export default function TodoItem({ todo, onToggleTodo }: TodoItemProps) {
       </p>
 
       {/* Knapp som togglar done-status via callback till App */}
-      <button onClick={() => onToggleTodo(todo)}>
+      <button
+        onClick={() => onToggleTodo(todo)}
+        style={{ marginRight: "0.5rem" }}
+      >
         {todo.done ? "Markera som ej klar" : "Markera som klar"}
       </button>
+
+      {/* Knapp som tar bort todon via callback till App */}
+      <button onClick={() => onDeleteTodo(todo.id)}>Ta bort</button>
     </li>
   );
 }
