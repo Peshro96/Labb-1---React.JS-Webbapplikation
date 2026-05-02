@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
+import TodoFilter from "./components/TodoFilter";
 import { getTodos, createTodo, updateTodo, deleteTodo } from "./api/todos";
 import type { Todo } from "./types/todo";
 
@@ -79,13 +80,15 @@ export default function App() {
 
       <TodoForm onAddTodo={addTodo} />
 
+      <TodoFilter currentFilter={filter} onFilterChange={setFilter} />
+
       {loading && <p>Laddar todos...</p>}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {!loading && !error && (
         <TodoList
-          todos={todos}
+          todos={filteredTodos}
           onToggleTodo={toggleTodo}
           onDeleteTodo={removeTodo}
         />
