@@ -4,6 +4,9 @@ import TodoForm from "./components/TodoForm";
 import { getTodos, createTodo, updateTodo, deleteTodo } from "./api/todos";
 import type { Todo } from "./types/todo";
 
+// Tillåtna filtervärden för listan
+type Filter = "all" | "done" | "undone";
+
 export default function App() {
   // State för listan av todos som visas i appen
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -13,6 +16,9 @@ export default function App() {
 
   // Error-state visar felmeddelande om något går snett
   const [error, setError] = useState<string>("");
+
+  // Filter-state styr vilka todos som visas (alla / klara / oklara)
+  const [filter, setFilter] = useState<Filter>("all");
 
   // Hämtar todos från API:t när komponenten mountas
   useEffect(() => {
@@ -59,6 +65,13 @@ export default function App() {
     // Filtrerar bort todon med matchande id från listan
     setTodos((prev) => prev.filter((t) => t.id !== id));
   };
+
+  // Beräknar vilka todos som ska visas baserat på filter
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "done") return todo.done;
+    if (filter === "undone") return !todo.done;
+    return true; // "all" - visa allt
+  });
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
