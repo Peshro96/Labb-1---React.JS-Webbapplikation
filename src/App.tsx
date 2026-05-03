@@ -75,12 +75,16 @@ export default function App() {
   });
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
-      <h1>Att-göra-lista</h1>
+    <main style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
+      <header>
+        <h1>Att-göra-lista</h1>
+      </header>
 
       <TodoForm onAddTodo={addTodo} />
 
       <TodoFilter currentFilter={filter} onFilterChange={setFilter} />
+
+      <h2>Mina todos</h2>
 
       {loading && <p>Laddar todos...</p>}
 
@@ -93,6 +97,6 @@ export default function App() {
           onDeleteTodo={removeTodo}
         />
       )}
-    </div>
+    </main>
   );
 }
