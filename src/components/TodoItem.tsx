@@ -27,7 +27,8 @@ export default function TodoItem({
         style={{
           margin: "0 0 4px 0",
           textDecoration: todo.done ? "line-through" : "none",
-          color: todo.done ? "#888" : "#000",
+          // #555 ger bättre kontrast än #888 enligt WCAG-kraven
+          color: todo.done ? "#555" : "#000",
         }}
       >
         {todo.title}
