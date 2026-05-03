@@ -75,14 +75,25 @@ export default function App() {
   });
 
   return (
-    <main style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
-      <header>
-        <h1>Att-göra-lista</h1>
+    <main
+      style={{
+        maxWidth: "600px",
+        margin: "0 auto",
+        padding: "2rem",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <header style={{ textAlign: "center" }}>
+        <h1 style={{ fontSize: "2.5rem", marginBottom: "1.5rem" }}>
+          Att-göra-lista
+        </h1>
       </header>
 
-      <TodoForm onAddTodo={addTodo} />
-
-      <TodoFilter currentFilter={filter} onFilterChange={setFilter} />
+      {/* Centrerad kontroll-del (formulär + filter) */}
+      <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+        <TodoForm onAddTodo={addTodo} />
+        <TodoFilter currentFilter={filter} onFilterChange={setFilter} />
+      </div>
 
       <h2>Mina todos</h2>
 
