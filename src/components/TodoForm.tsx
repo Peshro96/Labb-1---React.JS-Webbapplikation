@@ -49,13 +49,25 @@ export default function TodoForm({ onAddTodo }: TodoFormProps) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          // aria-invalid talar om för skärmläsare att fältet har ett fel
+          aria-invalid={error ? "true" : "false"}
+          // aria-describedby pekar på det element som beskriver felet
+          aria-describedby={error ? "todo-title-error" : undefined}
         />
       </div>
 
       <button type="submit">Lägg till</button>
 
-      {/* Visar felmeddelande om formuläret inte är giltigt */}
-      {error && <p style={{ color: "red", marginTop: "0.5rem" }}>{error}</p>}
+      {/* role="alert" gör att skärmläsare läser upp meddelandet direkt */}
+      {error && (
+        <p
+          id="todo-title-error"
+          role="alert"
+          style={{ color: "red", marginTop: "0.5rem" }}
+        >
+          {error}
+        </p>
+      )}
     </form>
   );
 }

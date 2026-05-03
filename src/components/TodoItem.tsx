@@ -44,8 +44,13 @@ export default function TodoItem({
         {todo.done ? "Markera som ej klar" : "Markera som klar"}
       </button>
 
-      {/* Knapp som tar bort todon via callback till App */}
-      <button onClick={() => onDeleteTodo(todo.id)}>Ta bort</button>
+      {/* aria-label ger skärmläsare en tydligare beskrivning av knappens funktion */}
+      <button
+        onClick={() => onDeleteTodo(todo.id)}
+        aria-label={`Ta bort ${todo.title}`}
+      >
+        Ta bort
+      </button>
     </li>
   );
 }
