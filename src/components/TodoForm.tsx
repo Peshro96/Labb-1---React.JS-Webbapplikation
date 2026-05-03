@@ -42,8 +42,10 @@ export default function TodoForm({ onAddTodo }: TodoFormProps) {
   return (
     <form onSubmit={handleSubmit} style={{ marginBottom: "1.5rem" }}>
       <div style={{ marginBottom: "0.5rem" }}>
-        <label>Ny todo: </label>
+        {/* htmlFor kopplar ihop label med input för skärmläsare */}
+        <label htmlFor="todo-title">Ny todo: </label>
         <input
+          id="todo-title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
